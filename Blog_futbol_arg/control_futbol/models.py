@@ -2,12 +2,12 @@ from django.db import models
 
 # Create your models here.
 
-class club(models.Model):
+class Club(models.Model):
     nombre = models.CharField(max_length=256)
     ubicacion = models.CharField(max_length=256)
 
 
-class jugador(models.Model):
+class Jugador(models.Model):
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
@@ -15,7 +15,7 @@ class jugador(models.Model):
     peso = models.IntegerField()
 
 
-class entrenador(models.Model):
+class Entrenador(models.Model):
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
