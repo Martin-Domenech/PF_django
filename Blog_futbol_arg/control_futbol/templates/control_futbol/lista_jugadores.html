@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>jugadores</title>
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1>Jugadores de Primera división Argentina</h1>
+<a href="{% url 'lista_jugadores' %}">Ver jugadores</a>
+<a href="{% url 'agregar_jugadores' %}">Agregar jugadores</a>
+<br><br>
+<ul>
+    {% for Jugador in jugadores %}
+        <li>
+            <p>{{Jugador.nombre}} {{ Jugador.apellido }}, juega en {{ Jugador.club }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock contenido %}
