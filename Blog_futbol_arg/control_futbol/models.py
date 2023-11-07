@@ -11,7 +11,7 @@ class Jugador(models.Model):
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
-    altura = models.IntegerField()
+    altura = models.CharField(max_length=64)
     peso = models.IntegerField()
 
 
