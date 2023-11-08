@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Entrenadores</title>
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1>Entrenadores de Primera división Argentina</h1>
+<a href="{% url 'lista_entrenadores' %}">Ver entrenadores</a>
+<a href="{% url 'agregar_entrenadores' %}">Agregar entrenadores</a>
+<br><br>
+<ul>
+    {% for Entrenador in entrenadores %}
+        <li>
+            <p>{{ Entrenador.nombre }} {{ Entrenador.apellido }}, dirige a {{ Entrenador.club }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock contenido %}
