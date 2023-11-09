@@ -6,15 +6,26 @@
 
 
 {% block contenido %}
-<h1>Clubes de Primera división Argentina</h1>
-<a href="{% url 'lista_clubes' %}">Ver Clubes</a>
-<a href="{% url 'agregar_clubes' %}">Agregar Clubes</a>
+<h1 class="d-flex justify-content-center">Clubes de Primera división Argentina</h1>
 <br><br>
-<ul>
-    {% for Club in clubes %}
-        <li>
-            <p>{{Club.nombre}}, de {{ Club.ubicacion }}</p>
-        </li>
-    {% endfor %}
-</ul>
+<section class="d-flex justify-content-evenly">
+    <a href="{% url 'lista_clubes' %}"><button type="button" class="btn btn-outline-primary">Ver Clubes</button></a>
+    <a href="{% url 'agregar_clubes' %}"><button type="button" class="btn btn-outline-primary">Agregar Club</button></a>
+</section>
+<br><br>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Club</th>
+            <th>Ubicacion</th>
+        </tr>
+        {% for Club in clubes %}
+        <tr>
+            <td>{{ Club.nombre }}</td>
+            <td>{{ Club.ubicacion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock contenido %}

@@ -6,13 +6,16 @@
 
 
 {% block contenido %}
-<h1>Agregar Club de Primera división Argentina</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ formulario.as_p }}
-    {{ formulario.errors }}
-    <input class="btn btn-success" type="submit" value="Agregar Club" />
+<h1 class="d-flex justify-content-center">Agregar Club de Primera división Argentina</h1>
+<br><br><br>
+<form class="d-flex justify-content-center" method="post">
+    <div class="d-block">
+        {% csrf_token %}
+        {{ formulario.as_p }}
+        {{ formulario.errors }}
+        <input class="btn btn-success" type="submit" value="Agregar Club" />
+    </div>
 </form>
-<br>
-<a href="{% url 'lista_clubes' %}">volver a la lista</a>
+<br><br><br><br>
+<a class="d-flex justify-content-center" href="{% url 'lista_entrenadores' %}"><button type="button" class="btn btn-outline-primary">Volver a la listas</button></a>
 {% endblock contenido %}

@@ -6,15 +6,28 @@
 
 
 {% block contenido %}
-<h1>Entrenadores de Primera división Argentina</h1>
-<a href="{% url 'lista_entrenadores' %}">Ver entrenadores</a>
-<a href="{% url 'agregar_entrenadores' %}">Agregar entrenadores</a>
+<h1 class="d-flex justify-content-center">Entrenadores de Primera división Argentina</h1>
 <br><br>
-<ul>
-    {% for Entrenador in entrenadores %}
-        <li>
-            <p>{{ Entrenador.nombre }} {{ Entrenador.apellido }}, dirige a {{ Entrenador.club }}</p>
-        </li>
-    {% endfor %}
-</ul>
+<section class="d-flex justify-content-evenly">
+    <a href="{% url 'lista_entrenadores' %}"><button type="button" class="btn btn-outline-primary">Ver Tecnico</button></a>
+    <a href="{% url 'agregar_entrenadores' %}"><button type="button" class="btn btn-outline-primary">Agregar Tecnico</button></a>
+</section>
+<br><br><br>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Club</th>
+        </tr>
+        {% for Entrenador in entrenadores %}
+        <tr>
+            <td>{{ Entrenador.nombre }}</td>
+            <td>{{ Entrenador.apellido }}</td>
+            <td>{{ Entrenador.club }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock contenido %}
