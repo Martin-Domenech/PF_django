@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>jugadores</title>
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1 class="d-flex justify-content-center">Articulos del Blog</h1>
+<br><br>
+<section class="d-flex justify-content-evenly">
+    <a href="{% url 'lista_blogs' %}"><button type="button" class="btn btn-outline-primary">Ver articulos</button></a>
+    <a href="{% url 'agregar_blogs' %}"><button type="button" class="btn btn-outline-primary">Agregar articulos</button></a>
+</section>
+<br><br>
+{% for Blog in blogs %}
+    <section class="d-flex justify-content-center">
+        <div class="shadow-sm p-3 mb-5 d-block border rounded">
+            <div class="d-flex justify-content-start fs-5">
+                <p>Articulo creado por: {{ Blog.autor }}</p>
+            </div>
+            <br><br>
+            <p>{{ Blog.contenido }}</p>
+            <br><br><br>
+            <div class="d-flex justify-content-evenly">
+                <form action="{% url 'eliminar_blog' Blog.id %}" method="post" >
+                    {% csrf_token %}
+                    <input type="submit" value="eliminar"/>
+                </form>
+                <form action="{% url 'editar_blog' Blog.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="editar"/>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endfor %}
+{% endblock contenido %}

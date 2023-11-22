@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 
-from control_futbol.models import Jugador, Club, Entrenador
-from control_futbol.forms import JugadorFormulario, ClubFormulario, EntrenadorFormulario
+from control_futbol.models import Jugador, Club, Entrenador, Blog
+from control_futbol.forms import JugadorFormulario, ClubFormulario, EntrenadorFormulario, BlogFormulario
 
 
 # Create your views here.
@@ -37,6 +37,18 @@ def listar_entrenadores(request):
     http_response = render(
         request = request,
         template_name = 'control_futbol/lista_entrenadores.html',
+        context=contexto,
+    )
+    return http_response
+
+
+def listar_blogs(request):
+    contexto = {
+        "blogs": Blog.objects.all(),
+    }
+    http_response = render(
+        request = request,
+        template_name = 'control_futbol/lista_blogs.html',
         context=contexto,
     )
     return http_response
@@ -120,6 +132,30 @@ def crear_entrenadores(request):
     )
     return http_response
 
+def crear_blogs(request):
+    if request.method == "POST":
+        formulario = BlogFormulario(request.POST)
+
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            autor = data["autor"]
+            contenido = data["contenido"]
+
+            blog = Blog(autor=autor, contenido=contenido)
+            blog.save()
+
+            url_exitosa = reverse('lista_blogs')
+            return redirect(url_exitosa)
+    else:
+        formulario=BlogFormulario()
+        
+    http_response = render(
+        request=request,
+        template_name='control_futbol/agregar_Blogs.html',
+        context={'formulario': formulario}
+    )
+    return http_response
+
 
 def buscar_jugadores(request):
     if request.method == "POST":
@@ -137,3 +173,34 @@ def buscar_jugadores(request):
         context=contexto,
     )
     return http_response    
+
+def eliminar_blog(request, id):
+   blog = Blog.objects.get(id=id)
+   if request.method == "POST":
+       blog.delete()
+       url_exitosa = reverse('lista_blogs')
+       return redirect(url_exitosa)
+   
+def editar_blog(request, id):
+   blog = Blog.objects.get(id=id)
+   if request.method == "POST":
+       formulario = BlogFormulario(request.POST)
+
+       if formulario.is_valid():
+           data = formulario.cleaned_data
+           blog.autor = data['autor']
+           blog.contenido = data['contenido']
+           blog.save()
+           url_exitosa = reverse('lista_blogs')
+           return redirect(url_exitosa)
+   else:  # GET
+       inicial = {
+           'autor': blog.autor,
+           'comision': blog.contenido,
+       }
+       formulario = BlogFormulario(initial=inicial)
+   return render(
+       request=request,
+       template_name='control_futbol/agregar_blogs.html',
+       context={'formulario': formulario},
+   )

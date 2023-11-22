@@ -19,3 +19,7 @@ class Entrenador(models.Model):
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
+
+class Blog(models.Model):
+    autor = models.CharField(max_length=256)
+    contenido = models.CharField(max_length=1000)

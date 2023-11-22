@@ -32,8 +32,8 @@ python manage.py runserver
 ```
 
 # Superusuario de pruebas
-username: admin
-contraseña: qwer1234
+username: admin1
+contraseña: admin1234
 
 # Funcionalidades
 En la pagina se muestran en tablas los jugadores, entrenadores y clubes que hayan sido agregados por el usuario en 
