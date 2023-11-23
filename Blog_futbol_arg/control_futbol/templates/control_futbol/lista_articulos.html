@@ -17,7 +17,7 @@
     <section class="d-flex justify-content-center">
         <div class="shadow-sm p-3 mb-5 d-block border rounded">
             <div class="d-flex justify-content-center fs-1">
-                <p>{{ Articulo.titulo }}</p>
+                <p>{{ Articulo.titulo }} </p>
             </div>
             <br>
             <div class="d-flex justify-content-start fs-3">
@@ -27,15 +27,13 @@
             <div class="d-flex justify-content-start fs-4">
                 <p>{{ Articulo.cuerpo }}</p>
             </div>
-            <br><br>
+            <br>
             <div class="d-flex justify-content-start fs-5">
                 <p>Articulo creado por: {{ Articulo.autor }}</p>
             </div>
-            <br>
-            <div class="d-flex justify-content-end fs-5">
+            <div class="justify-content-start">
                 <p>{{ Articulo.fecha }}</p>
             </div>
-            <br>
             <div class="d-flex justify-content-end">
                 <form action="{% url 'eliminar_articulo' Articulo.id %}" method="post" >
                     {% csrf_token %}
