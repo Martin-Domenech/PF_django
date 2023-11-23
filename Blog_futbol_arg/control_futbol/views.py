@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
 
-from control_futbol.models import Jugador, Club, Entrenador, Blog
-from control_futbol.forms import JugadorFormulario, ClubFormulario, EntrenadorFormulario, BlogFormulario
+from control_futbol.models import Jugador, Club, Entrenador, Articulo
+from control_futbol.forms import JugadorFormulario, ClubFormulario, EntrenadorFormulario, ArticuloFormulario
 
 
 # Create your views here.
@@ -42,13 +42,13 @@ def listar_entrenadores(request):
     return http_response
 
 
-def listar_blogs(request):
+def listar_articulo(request):
     contexto = {
-        "blogs": Blog.objects.all(),
+        "articulos": Articulo.objects.all(),
     }
     http_response = render(
         request = request,
-        template_name = 'control_futbol/lista_blogs.html',
+        template_name = 'control_futbol/lista_articulos.html',
         context=contexto,
     )
     return http_response
@@ -132,26 +132,30 @@ def crear_entrenadores(request):
     )
     return http_response
 
-def crear_blogs(request):
+def crear_articulos(request):
     if request.method == "POST":
-        formulario = BlogFormulario(request.POST)
+        formulario = ArticuloFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data
             autor = data["autor"]
-            contenido = data["contenido"]
+            cuerpo = data["cuerpo"]
+            titulo = data["titulo"]
+            subtitulo = data["subtitulo"]
+            fecha = data["fecha"]
 
-            blog = Blog(autor=autor, contenido=contenido)
-            blog.save()
 
-            url_exitosa = reverse('lista_blogs')
+            articulo = Articulo(autor=autor, cuerpo=cuerpo, titulo=titulo, subtitulo=subtitulo, fecha=fecha)
+            articulo.save()
+
+            url_exitosa = reverse('lista_articulos')
             return redirect(url_exitosa)
     else:
-        formulario=BlogFormulario()
+        formulario=ArticuloFormulario()
         
     http_response = render(
         request=request,
-        template_name='control_futbol/agregar_Blogs.html',
+        template_name='control_futbol/agregar_articulos.html',
         context={'formulario': formulario}
     )
     return http_response
@@ -174,33 +178,40 @@ def buscar_jugadores(request):
     )
     return http_response    
 
-def eliminar_blog(request, id):
-   blog = Blog.objects.get(id=id)
+def eliminar_articulo(request, id):
+   articulo = Articulo.objects.get(id=id)
    if request.method == "POST":
-       blog.delete()
-       url_exitosa = reverse('lista_blogs')
+       articulo.delete()
+       url_exitosa = reverse('lista_articulos')
        return redirect(url_exitosa)
    
-def editar_blog(request, id):
-   blog = Blog.objects.get(id=id)
-   if request.method == "POST":
-       formulario = BlogFormulario(request.POST)
+def editar_articulo(request, id):
+    articulo = Articulo.objects.get(id=id)
+    if request.method == "POST":
+        formulario = ArticuloFormulario(request.POST)
 
-       if formulario.is_valid():
-           data = formulario.cleaned_data
-           blog.autor = data['autor']
-           blog.contenido = data['contenido']
-           blog.save()
-           url_exitosa = reverse('lista_blogs')
-           return redirect(url_exitosa)
-   else:  # GET
-       inicial = {
-           'autor': blog.autor,
-           'comision': blog.contenido,
-       }
-       formulario = BlogFormulario(initial=inicial)
-   return render(
-       request=request,
-       template_name='control_futbol/agregar_blogs.html',
-       context={'formulario': formulario},
-   )
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            articulo.autor = data['autor']
+            articulo.cuerpo = data['cuerpo']
+            articulo.titulo = data['titulo']
+            articulo.subtitulo = data['subtitulo']
+            articulo.fecha = data['fecha']
+  
+            articulo.save()
+            url_exitosa = reverse('lista_articulos')
+            return redirect(url_exitosa)
+        else:  # GET
+            inicial = {
+                'autor': articulo.autor,
+                'cuerpo': articulo.cuerpo,
+                'titulo': articulo.titulo,
+                'subtitulo': articulo.subtitulo,
+                'fecha': articulo.fecha,
+            }
+        formulario = ArticuloFormulario(initial=inicial)
+    return render(
+        request=request,
+        template_name='control_futbol/agregar_articulos.html',
+        context={'formulario': formulario},
+    )

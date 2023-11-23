@@ -16,6 +16,9 @@ class EntrenadorFormulario(forms.Form):
     apellido = forms.CharField(required=True, max_length=256)
     club = forms.CharField(required=True, max_length=256)
 
-class BlogFormulario(forms.Form):
+class ArticuloFormulario(forms.Form):
     autor = forms.CharField(required=True, max_length=256)
-    contenido = forms.CharField(required=True, max_length=1000)
+    titulo = forms.CharField(required=True, max_length=256)
+    subtitulo = forms.CharField(required=True, max_length=256)
+    cuerpo = forms.CharField(required=True, max_length=1000)
+    fecha = forms.CharField(required=False, max_length=64)

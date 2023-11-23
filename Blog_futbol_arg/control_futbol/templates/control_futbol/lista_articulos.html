@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Blog Futbol-ARG</title>
+{% endblock titulo %}
+
+
+{% block contenido %}
+<h1 class="d-flex justify-content-center">Articulos del Blog</h1>
+<br><br>
+<section class="d-flex justify-content-evenly">
+    <a href="{% url 'lista_articulos' %}"><button type="button" class="btn btn-outline-primary">Ver articulos</button></a>
+    <a href="{% url 'agregar_articulos' %}"><button type="button" class="btn btn-outline-primary">Agregar articulos</button></a>
+</section>
+<br><br>
+{% for Articulo in articulos %}
+    <section class="d-flex justify-content-center">
+        <div class="shadow-sm p-3 mb-5 d-block border rounded">
+            <div class="d-flex justify-content-center fs-1">
+                <p>{{ Articulo.titulo }}</p>
+            </div>
+            <br>
+            <div class="d-flex justify-content-start fs-3">
+                <p>{{ Articulo.subtitulo }}</p>
+            </div>
+            <br>
+            <div class="d-flex justify-content-start fs-4">
+                <p>{{ Articulo.cuerpo }}</p>
+            </div>
+            <br><br>
+            <div class="d-flex justify-content-start fs-5">
+                <p>Articulo creado por: {{ Articulo.autor }}</p>
+            </div>
+            <br>
+            <div class="d-flex justify-content-end fs-5">
+                <p>{{ Articulo.fecha }}</p>
+            </div>
+            <br>
+            <div class="d-flex justify-content-end">
+                <form action="{% url 'eliminar_articulo' Articulo.id %}" method="post" >
+                    {% csrf_token %}
+                    <input type="submit" value="eliminar"/>
+                </form>
+                <form action="{% url 'editar_articulo' Articulo.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="editar"/>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endfor %}
+
+{% endblock contenido %}

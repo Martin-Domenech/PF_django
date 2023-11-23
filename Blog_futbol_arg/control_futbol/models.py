@@ -20,6 +20,10 @@ class Entrenador(models.Model):
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
 
-class Blog(models.Model):
+
+class Articulo(models.Model):
     autor = models.CharField(max_length=256)
-    contenido = models.CharField(max_length=1000)
+    titulo = models.CharField(max_length=256)
+    subtitulo = models.CharField(max_length=256)
+    cuerpo = models.CharField(max_length=1200)
+    fecha = models.CharField(max_length=64)
