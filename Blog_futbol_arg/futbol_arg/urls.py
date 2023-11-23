@@ -18,12 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from futbol_arg.views import saludo
-from control_futbol.views import listar_jugadores
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("futbol/", include("control_futbol.urls")),
-
+    path("perfiles/", include("perfiles.urls")),
 
     path("", saludo, name='inicio'),
 ]

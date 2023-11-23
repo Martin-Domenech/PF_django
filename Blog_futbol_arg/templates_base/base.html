@@ -29,6 +29,13 @@
                 <a class="navbar-brand" href="{% url 'lista_jugadores' %}"><button type="button" class="btn btn-secondary">JUGADORES</button></a>
                 <a class="navbar-brand" href="{% url 'lista_clubes' %}"><button type="button" class="btn btn-secondary">CLUBES</button></a>
                 <a class="navbar-brand" href="{% url 'lista_entrenadores' %}"><button type="button" class="btn btn-secondary">TECNICOS</button></a>
+                {% if user.is_authenticated %}
+                <a class="btn btn-warning" href="{% url 'logout' %}">Cierre sesión</a>
+                {% else %}
+                <a class="btn btn-primary" href="{% url 'login' %}">Inicio sesión</a>
+                <a class="btn btn-success" href="{% url 'registro' %}">Registro</a>
+                {% endif %}
+ 
             </div>
         </nav>
 
