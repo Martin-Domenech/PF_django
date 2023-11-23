@@ -26,4 +26,4 @@ class Articulo(models.Model):
     titulo = models.CharField(max_length=256)
     subtitulo = models.CharField(max_length=256)
     cuerpo = models.CharField(max_length=1200)
-    fecha = models.CharField(max_length=64)
+    fecha = models.DateTimeField(auto_now_add=True)

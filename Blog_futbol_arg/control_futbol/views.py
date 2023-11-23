@@ -44,7 +44,7 @@ def listar_entrenadores(request):
 
 def listar_articulo(request):
     contexto = {
-        "articulos": Articulo.objects.all(),
+        "articulos": Articulo.objects.all().order_by('-fecha'),
     }
     http_response = render(
         request = request,
@@ -142,10 +142,10 @@ def crear_articulos(request):
             cuerpo = data["cuerpo"]
             titulo = data["titulo"]
             subtitulo = data["subtitulo"]
-            fecha = data["fecha"]
+            
 
 
-            articulo = Articulo(autor=autor, cuerpo=cuerpo, titulo=titulo, subtitulo=subtitulo, fecha=fecha)
+            articulo = Articulo(autor=autor, cuerpo=cuerpo, titulo=titulo, subtitulo=subtitulo)
             articulo.save()
 
             url_exitosa = reverse('lista_articulos')
@@ -196,7 +196,6 @@ def editar_articulo(request, id):
             articulo.cuerpo = data['cuerpo']
             articulo.titulo = data['titulo']
             articulo.subtitulo = data['subtitulo']
-            articulo.fecha = data['fecha']
   
             articulo.save()
             url_exitosa = reverse('lista_articulos')

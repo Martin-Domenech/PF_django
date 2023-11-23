@@ -21,4 +21,4 @@ class ArticuloFormulario(forms.Form):
     titulo = forms.CharField(required=True, max_length=256)
     subtitulo = forms.CharField(required=True, max_length=256)
     cuerpo = forms.CharField(required=True, max_length=1000)
-    fecha = forms.CharField(required=False, max_length=64)
+
