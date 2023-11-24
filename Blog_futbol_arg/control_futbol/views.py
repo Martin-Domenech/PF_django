@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from control_futbol.models import Jugador, Club, Entrenador, Articulo
 from control_futbol.forms import JugadorFormulario, ClubFormulario, EntrenadorFormulario, ArticuloFormulario
@@ -132,6 +134,7 @@ def crear_entrenadores(request):
     )
     return http_response
 
+@login_required
 def crear_articulos(request):
     if request.method == "POST":
         formulario = ArticuloFormulario(request.POST)
