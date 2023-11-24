@@ -1,4 +1,5 @@
 from django import forms
+from control_futbol.models import Articulo
 
 class JugadorFormulario(forms.Form):
     nombre = forms.CharField(required=True, max_length=64)
@@ -16,9 +17,15 @@ class EntrenadorFormulario(forms.Form):
     apellido = forms.CharField(required=True, max_length=256)
     club = forms.CharField(required=True, max_length=256)
 
-class ArticuloFormulario(forms.Form):
-    autor = forms.CharField(required=True, max_length=256)
-    titulo = forms.CharField(required=True, max_length=256)
-    subtitulo = forms.CharField(required=True, max_length=256)
-    cuerpo = forms.CharField(required=True, max_length=1000)
+class ArticuloFormulario(forms.ModelForm):
+    class Meta:
+        model = Articulo
+        fields = ['titulo', 'subtitulo', 'cuerpo']
+
+
+# class ArticuloFormulario(forms.Form):
+#     autor = forms.CharField(required=True, max_length=256)
+#     titulo = forms.CharField(required=True, max_length=256)
+#     subtitulo = forms.CharField(required=True, max_length=256)
+#     cuerpo = forms.TextInput(required=True)
 

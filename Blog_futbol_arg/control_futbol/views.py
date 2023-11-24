@@ -55,7 +55,7 @@ def listar_articulo(request):
     )
     return http_response
 
-
+@login_required
 def crear_jugadores(request):
     if request.method == "POST":
         formulario = JugadorFormulario(request.POST)
@@ -68,7 +68,7 @@ def crear_jugadores(request):
             altura = data["altura"]
             peso = data["peso"]
 
-            jugador = Jugador(nombre=nombre, apellido=apellido, club=club, altura=altura, peso=peso)
+            jugador = Jugador(nombre=nombre, apellido=apellido, club=club, altura=altura, peso=peso, creador=request.user)
             jugador.save()
 
             url_exitosa = reverse('lista_jugadores')
@@ -83,7 +83,7 @@ def crear_jugadores(request):
     )
     return http_response
 
-
+@login_required
 def crear_clubes(request):
     if request.method == "POST":
         formulario = ClubFormulario(request.POST)
@@ -93,7 +93,7 @@ def crear_clubes(request):
             nombre = data["nombre"]
             ubicacion = data["ubicacion"]
 
-            club = Club(nombre=nombre, ubicacion=ubicacion)
+            club = Club(nombre=nombre, ubicacion=ubicacion, creador=request.user)
             club.save()
 
             url_exitosa = reverse('lista_clubes')
@@ -108,7 +108,7 @@ def crear_clubes(request):
     )
     return http_response
 
- 
+@login_required
 def crear_entrenadores(request):
     if request.method == "POST":
         formulario = EntrenadorFormulario(request.POST)
@@ -119,7 +119,7 @@ def crear_entrenadores(request):
             apellido = data["apellido"]
             club = data["club"]
 
-            entrenador = Entrenador(nombre=nombre, apellido=apellido, club=club)
+            entrenador = Entrenador(nombre=nombre, apellido=apellido, club=club, creador=request.user)
             entrenador.save()
 
             url_exitosa = reverse('lista_entrenadores')
@@ -141,14 +141,13 @@ def crear_articulos(request):
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            autor = data["autor"]
             cuerpo = data["cuerpo"]
             titulo = data["titulo"]
             subtitulo = data["subtitulo"]
             
 
 
-            articulo = Articulo(autor=autor, cuerpo=cuerpo, titulo=titulo, subtitulo=subtitulo)
+            articulo = Articulo(cuerpo=cuerpo, titulo=titulo, subtitulo=subtitulo, creador=request.user)
             articulo.save()
 
             url_exitosa = reverse('lista_articulos')
@@ -179,15 +178,17 @@ def buscar_jugadores(request):
         template_name='control_futbol/lista_jugadores.html',
         context=contexto,
     )
-    return http_response    
-
+    return http_response  
+  
+@login_required
 def eliminar_articulo(request, id):
    articulo = Articulo.objects.get(id=id)
    if request.method == "POST":
        articulo.delete()
        url_exitosa = reverse('lista_articulos')
        return redirect(url_exitosa)
-   
+
+@login_required
 def editar_articulo(request, id):
     articulo = Articulo.objects.get(id=id)
     if request.method == "POST":

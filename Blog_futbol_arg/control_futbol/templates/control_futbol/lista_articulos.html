@@ -29,12 +29,13 @@
             </div>
             <br>
             <div class="d-flex justify-content-start fs-5">
-                <p>Articulo creado por: {{ Articulo.autor }}</p>
+                <p>Articulo creado por: {{ Articulo.creador.username }}</p>
             </div>
             <div class="justify-content-start">
                 <p>{{ Articulo.fecha }}</p>
             </div>
             <div class="d-flex justify-content-end">
+                {% if user == Articulo.creador%}
                 <form action="{% url 'eliminar_articulo' Articulo.id %}" method="post" >
                     {% csrf_token %}
                     <input type="submit" value="eliminar"/>
@@ -43,6 +44,7 @@
                     {% csrf_token %}
                     <input type="submit" value="editar"/>
                 </form>
+                {% endif %}
             </div>
         </div>
     </section>
