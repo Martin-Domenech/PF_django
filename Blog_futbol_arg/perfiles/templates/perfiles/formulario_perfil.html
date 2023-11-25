@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="d-flex justify-content-center">
+    <div class="d-block ">
+        <h2>Tu username es <b>{{ object.username }}</b></h2>
+        <br>
+        <div class="border border-black border-3 p-5">
+            <h3>Editar datos:</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Guardar"/>
+            </form>
+        </div>
+    </div>  
+</div>
+{% endblock contenido %}

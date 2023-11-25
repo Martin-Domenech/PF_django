@@ -32,7 +32,7 @@ python manage.py runserver
 ```
 
 # Superusuario de pruebas
-username: admin1
+username: admin
 contraseña: admin1234
 
 # Funcionalidades

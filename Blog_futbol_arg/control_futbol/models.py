@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Club(models.Model):
     nombre = models.CharField(max_length=256)
     ubicacion = models.CharField(max_length=256)
-    creador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 
 
 class Jugador(models.Model):
@@ -15,14 +15,14 @@ class Jugador(models.Model):
     club = models.CharField(max_length=256)
     altura = models.CharField(max_length=64)
     peso = models.IntegerField()
-    creador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 
 
 class Entrenador(models.Model):
     nombre = models.CharField(max_length=64)
     apellido = models.CharField(max_length=256)
     club = models.CharField(max_length=256)
-    creador = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
 
 
 class Articulo(models.Model):
