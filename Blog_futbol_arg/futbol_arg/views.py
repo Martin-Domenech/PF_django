@@ -9,3 +9,12 @@ def saludo(request):
         context=contexto,
     )
     return Http_response
+
+def about(request):
+    contexto={}
+    Http_response = render(
+        request=request,
+        template_name='about.html',
+        context=contexto,
+    )
+    return Http_response

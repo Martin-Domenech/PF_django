@@ -26,12 +26,16 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Club</th>
+            <th>altura (m)</th>
+            <th>peso (kg)</th>
         </tr>
         {% for Jugador in jugadores %}
         <tr>
             <td>{{ Jugador.nombre }}</td>
             <td>{{ Jugador.apellido }}</td>
             <td>{{ Jugador.club }}</td>
+            <td>{{ Jugador.altura }}</td>
+            <td>{{ Jugador.peso }}</td>
         </tr>
         {% endfor %}
     </tbody>

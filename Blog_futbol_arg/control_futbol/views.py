@@ -68,7 +68,7 @@ def crear_jugadores(request):
             altura = data["altura"]
             peso = data["peso"]
 
-            jugador = Jugador(nombre=nombre, apellido=apellido, club=club, altura=altura, peso=peso, creador=request.user)
+            jugador = Jugador(nombre=nombre, apellido=apellido, club=club, altura=altura, peso=peso)
             jugador.save()
 
             url_exitosa = reverse('lista_jugadores')
@@ -93,7 +93,7 @@ def crear_clubes(request):
             nombre = data["nombre"]
             ubicacion = data["ubicacion"]
 
-            club = Club(nombre=nombre, ubicacion=ubicacion, creador=request.user)
+            club = Club(nombre=nombre, ubicacion=ubicacion)
             club.save()
 
             url_exitosa = reverse('lista_clubes')
@@ -119,7 +119,7 @@ def crear_entrenadores(request):
             apellido = data["apellido"]
             club = data["club"]
 
-            entrenador = Entrenador(nombre=nombre, apellido=apellido, club=club, creador=request.user)
+            entrenador = Entrenador(nombre=nombre, apellido=apellido, club=club)
             entrenador.save()
 
             url_exitosa = reverse('lista_entrenadores')
@@ -196,7 +196,6 @@ def editar_articulo(request, id):
 
         if formulario.is_valid():
             data = formulario.cleaned_data
-            articulo.autor = data['autor']
             articulo.cuerpo = data['cuerpo']
             articulo.titulo = data['titulo']
             articulo.subtitulo = data['subtitulo']
@@ -206,11 +205,9 @@ def editar_articulo(request, id):
             return redirect(url_exitosa)
         else:  # GET
             inicial = {
-                'autor': articulo.autor,
                 'cuerpo': articulo.cuerpo,
                 'titulo': articulo.titulo,
                 'subtitulo': articulo.subtitulo,
-                'fecha': articulo.fecha,
             }
         formulario = ArticuloFormulario(initial=inicial)
     return render(

@@ -35,7 +35,10 @@ python manage.py runserver
 username: admin
 contraseña: admin1234
 
-# usuario generico
+# usuarios generico
+username: MDome     
+contraseña: aaajpasion
+
 username: Julio123
 contraseña: juliojulio
 

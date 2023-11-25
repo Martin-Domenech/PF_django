@@ -26,7 +26,6 @@ class Entrenador(models.Model):
 
 
 class Articulo(models.Model):
-    autor = models.CharField(max_length=256)
     titulo = models.CharField(max_length=256)
     subtitulo = models.CharField(max_length=256)
     cuerpo = models.TextField()

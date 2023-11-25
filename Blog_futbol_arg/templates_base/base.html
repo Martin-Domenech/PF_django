@@ -29,7 +29,8 @@
                 <a class="navbar-brand" href="{% url 'lista_jugadores' %}"><button type="button" class="btn btn-secondary">JUGADORES</button></a>
                 <a class="navbar-brand" href="{% url 'lista_clubes' %}"><button type="button" class="btn btn-secondary">CLUBES</button></a>
                 <a class="navbar-brand" href="{% url 'lista_entrenadores' %}"><button type="button" class="btn btn-secondary">TECNICOS</button></a>
-                <div class="">
+                <a class="navbar-brand" href="{% url 'about' %}"><button type="button" class="btn btn-secondary">Acerca de mi</button></a>
+                <div>
                     {% if user.is_authenticated %}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle btn-success" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
