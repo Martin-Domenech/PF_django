@@ -35,6 +35,13 @@ python manage.py runserver
 username: admin
 contraseña: admin1234
 
+# usuario generico
+username: Julio123
+contraseña: juliojulio
+
 # Funcionalidades
-En la pagina se muestran en tablas los jugadores, entrenadores y clubes que hayan sido agregados por el usuario en 
-la base de datos. Tambien en la seccion Jugadores se puede filtrar por nombre o apellido.
+En la pagina se muestran en tablas los jugadores, entrenadores y clubes que hayan sido agregados por usuarios usuario en 
+la base de datos. Tambien hay disponible una seccion de blogs para que cada usuario pueda postear noticias.
+
+# Test
+En el archivo test.py de la app app control_futbol, se encuentra el test unitario para el modelo Club.
